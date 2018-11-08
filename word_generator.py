@@ -23,7 +23,8 @@ def generate_population (population_size, word_length):
 def fitness (word, word_to_match):
     if (len(word) != len(word_to_match)):
         print("Words have different lengths")
-        return
+
+        return -1
     else:
         score = 0
 
@@ -31,7 +32,7 @@ def fitness (word, word_to_match):
             if (word[i] == word_to_match[i]):
                 score += 1
 
-        return score * 100 / len(word_to_match)
+        return score
 
 def compute_population_fitness(population, word_to_match):
     fitnesses = {}
@@ -39,7 +40,7 @@ def compute_population_fitness(population, word_to_match):
     for individual in population:
         fitnesses[individual] = fitness(word_to_match, individual)
 
-    return sorted(population.items(), key = operator.itemgetter(1), reverse = True)
+    return sorted(fitnesses.iteritems(), key = lambda (k,v): (v,k), reverse = True)
 
 def select_from_population(sorted_population, fit_count, unfit_count):
     next_gen = []
