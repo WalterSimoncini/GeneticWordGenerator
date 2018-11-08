@@ -13,7 +13,7 @@ def generate_letter ():
 def generate_word (length):
     result = ""
 
-    for i in range(0, length):
+    for _ in range(0, length):
         result += generate_letter()
     
     return result
@@ -21,7 +21,7 @@ def generate_word (length):
 def generate_population (population_size, word_length):
     population = []
 
-    for i in range(0, population_size):
+    for _ in range(0, population_size):
         population.append(generate_word(word_length))
     
     return population
