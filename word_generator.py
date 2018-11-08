@@ -10,6 +10,13 @@ def generate_word (length):
     
     return result
 
+def generate_population (size, word_to_match):
+    population = []
+
+    for i in range(0, size):
+        population.append(generate_word(len(word_to_match)))
+    
+    return population
 
 def fitness (word, word_to_match):
     if (len(word) != len(word_to_match)):
