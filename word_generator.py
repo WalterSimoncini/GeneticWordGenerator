@@ -38,3 +38,16 @@ def compute_population_fitness(population, word_to_match):
         fitnesses[individual] = fitness(word_to_match, individual)
 
     return sorted(population.items(), key = operator.itemgetter(1), reverse = True)
+
+def select_from_population(sorted_population, fit_count, unfit_count):
+    next_gen = []
+
+    for i in range(fit_count):
+        next_gen.append(sorted_population[i][0])
+
+    for i in range(unfit_count):
+        next_gen.append(random.choice(sorted_population)[0])
+    
+    random.shuffle(next_gen)
+
+    return next_gen
