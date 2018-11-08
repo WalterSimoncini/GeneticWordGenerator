@@ -51,3 +51,23 @@ def select_from_population(sorted_population, fit_count, unfit_count):
     random.shuffle(next_gen)
 
     return next_gen
+
+def create_child (parent_a, parent_b):
+    child = ""
+
+    for i in range(len(parent_a)):
+        if (int(100 * random.random()) < 50):
+            child += parent_a[i]
+        else:
+            child += parent_b[i]
+        
+    return child
+
+def create_children(breeders, children_count):
+    next_population = []
+
+    for i in range(len(breeders) / 2):
+        for j in range(children_count):
+            next_population.append(create_child(breeders[i], breeders[len(breeders) - 1 - i]))
+    
+    return next_population
