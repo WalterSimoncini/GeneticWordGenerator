@@ -1,14 +1,20 @@
 import random
 import operator
 
+def coin_flip ():
+    return random.random() < 0.5
+
+def generate_letter ():
+    characters_table = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', '?', '!', ',', '.']
+    idx = int(random.random() * len(characters_table))
+
+    return characters_table[idx]
+
 def generate_word (length):
     result = ""
 
     for i in range(0, length):
-        delta = int(26 * random.random())
-        letter = chr(97 + delta)
-
-        result += letter
+        result += generate_letter()
     
     return result
 
@@ -59,14 +65,14 @@ def create_child (parent_a, parent_b):
     child = ""
 
     for i in range(len(parent_a)):
-        if (int(100 * random.random()) < 50):
+        if (coin_flip):
             child += parent_a[i]
         else:
             child += parent_b[i]
         
     return child
 
-def create_children(breeders, children_count):
+def create_children (breeders, children_count):
     next_population = []
 
     for i in range(len(breeders) / 2):
@@ -75,19 +81,46 @@ def create_children(breeders, children_count):
     
     return next_population
 
-def mutate(child):
-    idx  = int(random.random() * len(child))
+def mutate (individual):
+    idx = int(random.random() * len(individual))
 
-    if (index_modification == 0):
-        word = chr(97 + int(26 * random.random())) + word[1:]
-    else:
-        word = word[:idx] + chr(97 + int(26 * random.random())) + word[idx+1:]
-	
-    return word
+    characters = list(individual)
+    characters[idx] = generate_letter()
+
+    return "".join(characters)
 
 def mutate_population (population, mutation_chance):
     for i in range(len(population)):
         if random.random() < mutation_chance:
-            population[i] = mutate[population[i]]
+            population[i] = mutate(population[i])
     
     return population
+
+def check_for_matching_word(population, word_to_match):
+    for word in population:
+        if word == word_to_match:
+            return True
+    
+    return False
+
+
+test_word = "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+population_size = 200
+
+word_length = len(test_word)
+population = generate_population(population_size, word_length)
+generation = 1
+
+while not check_for_matching_word(population, test_word):
+    fitnesses = compute_population_fitness(population, test_word)
+    
+    individuals_for_breeding = select_from_population(fitnesses, int(population_size / 3), 5)
+    
+    new_generation = create_children(individuals_for_breeding, population_size)
+    population = mutate_population(new_generation, 0.3)
+    
+    print("Fittest individual (Generation " + str(generation) + "): " + population[0])
+
+    generation += 1
+
+print("Fittest individual (Generation " + str(generation) + "): " + population[0])
