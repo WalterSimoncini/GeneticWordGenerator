@@ -4,17 +4,19 @@ import operator
 def generate_word (length):
     result = ""
 
-    for i in range(0, len(word_to_match)):
-        letter = chr(97 + int(26 * random.random()))
+    for i in range(0, length):
+        delta = int(26 * random.random())
+        letter = chr(97 + delta)
+
         result += letter
     
     return result
 
-def generate_population (size, word_to_match):
+def generate_population (population_size, word_length):
     population = []
 
-    for i in range(0, size):
-        population.append(generate_word(len(word_to_match)))
+    for i in range(0, population_size):
+        population.append(generate_word(word_length))
     
     return population
 
@@ -71,3 +73,20 @@ def create_children(breeders, children_count):
             next_population.append(create_child(breeders[i], breeders[len(breeders) - 1 - i]))
     
     return next_population
+
+def mutate(child):
+    idx  = int(random.random() * len(child))
+
+    if (index_modification == 0):
+        word = chr(97 + int(26 * random.random())) + word[1:]
+    else:
+        word = word[:idx] + chr(97 + int(26 * random.random())) + word[idx+1:]
+	
+    return word
+
+def mutate_population (population, mutation_chance):
+    for i in range(len(population)):
+        if random.random() < mutation_chance:
+            population[i] = mutate[population[i]]
+    
+    return population
