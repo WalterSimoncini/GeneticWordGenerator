@@ -1,3 +1,6 @@
+import pprint
+import random
+import sys
 from utils import *
 
 def generate_individual (length):
@@ -46,7 +49,7 @@ def create_child_mid_crossover (parent_a, parent_b):
 def create_children (breeders, children_count):
     next_population = []
 
-    for i in range(len(breeders) / 2):
+    for i in range(int(len(breeders) / 2)):
         for j in range(children_count):
             next_population.append(create_child_mid_crossover(breeders[i], breeders[len(breeders) - 1 - i]))
     
@@ -67,7 +70,7 @@ def mutate_population (population, mutation_chance):
     
     return population
 
-def select_from_population(sorted_population, fit_count, unfit_count):
+def elitist_selection(sorted_population, fit_count, unfit_count):
     next_gen = []
 
     for i in range(fit_count):
