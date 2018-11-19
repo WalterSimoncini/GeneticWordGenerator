@@ -1,3 +1,4 @@
+import sys
 import random
 import operator
 
@@ -25,8 +26,7 @@ target_individual_index = check_for_matching_word(population, test_word)
 
 while target_individual_index == -1:
     fitnesses = compute_population_fitness(population, test_word)
-    
-    individuals_for_breeding = select_from_population(fitnesses, int(population_size / 3), 5)
+    individuals_for_breeding = elitist_selection(fitnesses, int(population_size / 3), 10)
     
     new_generation = create_children(individuals_for_breeding, population_size)
     population = mutate_population(new_generation, 0.3)
