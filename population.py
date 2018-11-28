@@ -33,6 +33,9 @@ def create_child_mid_crossover (parent_a, parent_b):
 
     return child
 
+def create_child_copy_parent (parent_a, parent_b):
+    return random.choice([parent_a, parent_b])
+
 # Creates a new children by selecting randomly a gene from
 # parent A or parent B for every gene of the newborn child
 def create_children (breeders, children_count):
