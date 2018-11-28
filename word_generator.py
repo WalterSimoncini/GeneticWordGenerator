@@ -57,4 +57,4 @@ if verbose:
     print("Fittest individual (Generation " + str(generation) + "): " + population[target_individual_index])
 
 time_elapsed = time.time() - start_time
-print(str(population_size) + ", " + str(generation) + ", " + str(time_elapsed))
+print(str(population_size) + ", " + str(generation) + ", " + str(mutation_rate) + ", " + str(time_elapsed))
