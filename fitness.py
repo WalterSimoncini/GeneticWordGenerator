@@ -19,14 +19,10 @@ def fitness (word, word_to_match):
 def compute_population_fitness(population, word_to_match):
     fitnesses = []
 
-    # print("P: " + str(len(population)))
-
     for individual in population:
         individual_tuple = tuple([individual, fitness(word_to_match, individual)]);
         fitnesses.append(individual_tuple)
 
     sorted_individuals = sorted(fitnesses, reverse = True, key = lambda tup: tup[1])
 
-    #print("Sorted: " + str(sorted_individuals))
-    
     return sorted_individuals

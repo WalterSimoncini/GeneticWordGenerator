@@ -1,6 +1,6 @@
+import sys
 import pprint
 import random
-import sys
 from utils import *
 
 def generate_individual (length):
@@ -61,9 +61,6 @@ def mutate_population (population, mutation_chance):
 
 def elitist_selection(sorted_population, fit_count, unfit_count):
     next_gen = []
-
-    #print(len(sorted_population))
-    #print(fit_count)
 
     for i in range(fit_count):
         next_gen.append(sorted_population[i][0])
