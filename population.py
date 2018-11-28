@@ -19,17 +19,6 @@ def generate_population (population_size, word_length):
     
     return population
 
-def create_child_random_selection (parent_a, parent_b):
-    child = ""
-
-    for i in range(len(parent_a)):
-        if (coin_flip):
-            child += parent_a[i]
-        else:
-            child += parent_b[i]
-        
-    return child
-
 # Creates a new children by taking half of the genes
 # from parent A and half of the genes from parent B
 # using a splitting point at the middle of the chromosome
@@ -49,10 +38,10 @@ def create_child_mid_crossover (parent_a, parent_b):
 def create_children (breeders, children_count):
     next_population = []
 
-    for i in range(int(len(breeders) / 2)):
-        for j in range(children_count):
-            next_population.append(create_child_mid_crossover(breeders[i], breeders[len(breeders) - 1 - i]))
-    
+    for j in range(children_count):
+        couple = random.sample(breeders, 2)
+        next_population.append(create_child_mid_crossover(couple[0], couple[1]))
+        
     return next_population
 
 def mutate (individual):
@@ -72,6 +61,9 @@ def mutate_population (population, mutation_chance):
 
 def elitist_selection(sorted_population, fit_count, unfit_count):
     next_gen = []
+
+    #print(len(sorted_population))
+    #print(fit_count)
 
     for i in range(fit_count):
         next_gen.append(sorted_population[i][0])

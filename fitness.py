@@ -17,15 +17,16 @@ def fitness (word, word_to_match):
         return score / float(len(word_to_match))
 
 def compute_population_fitness(population, word_to_match):
-    fitnesses = {}
+    fitnesses = []
+
+    # print("P: " + str(len(population)))
 
     for individual in population:
-        fitnesses[individual] = fitness(word_to_match, individual)
-        
-    sorted_individuals = sorted(fitnesses, key = fitnesses.get, reverse = True)
-    fitness_tuples = []
+        individual_tuple = tuple([individual, fitness(word_to_match, individual)]);
+        fitnesses.append(individual_tuple)
 
-    for individual in sorted_individuals:
-        fitness_tuples.append(tuple([individual, fitnesses[individual]]))
+    sorted_individuals = sorted(fitnesses, reverse = True, key = lambda tup: tup[1])
 
-    return fitness_tuples
+    #print("Sorted: " + str(sorted_individuals))
+    
+    return sorted_individuals

@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Ignore the playground folder, used for sketches 
+playground/*
+
 # C extensions
 *.so
 
