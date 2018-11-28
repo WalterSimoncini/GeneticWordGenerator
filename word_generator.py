@@ -41,7 +41,7 @@ target_individual_index = check_for_matching_word(population, test_word)
 
 while target_individual_index == -1:
     fitnesses = compute_population_fitness(population, test_word)
-    individuals_for_breeding = elitist_selection(fitnesses, int(population_size / 2), min([5, population_size / 5]))
+    individuals_for_breeding = elitist_selection(fitnesses, max([int(population_size / 10), 2]))
     
     new_generation = create_children(individuals_for_breeding, population_size)
     

@@ -62,14 +62,11 @@ def mutate_population (population, mutation_chance):
     
     return population
 
-def elitist_selection(sorted_population, fit_count, unfit_count):
+def elitist_selection(sorted_population, fit_count):
     next_gen = []
 
     for i in range(fit_count):
         next_gen.append(sorted_population[i][0])
-
-    for i in range(unfit_count):
-        next_gen.append(random.choice(sorted_population)[0])
     
     random.shuffle(next_gen)
 
