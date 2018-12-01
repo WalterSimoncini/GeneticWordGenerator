@@ -20,9 +20,9 @@ def check_for_matching_word(population, word_to_match):
 if len(sys.argv) < 3:
     print("Usage: python word_generator.py <initial_population> <mutation_rate> <verbose>\n")
     print("Initial population: an integer representing the initial population for the algoritm.")
-    print("Mutation rate: a float in the range [0.0, 1.0] that represents the probability a newborn individual is mutated.")
-    print("Verbose: a string ('y' or 'n') that indicates whether the logs produced by the program should be verbose.")
-
+    print("Mutation rate: the chance a newborn individual is mutated. Must be a float in the range [0, 1]")
+    print("Verbose: a string ('y' / 'n') that indicates whether the logs should be verbose.")
+    
     sys.exit()
 
 test_word = "hello world"

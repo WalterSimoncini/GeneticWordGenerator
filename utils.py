@@ -1,6 +1,6 @@
 import random
 
-# Flip a coin and return a boolean balue
+# Flip a coin and return a boolean value
 def coin_flip ():
     return random.random() < 0.5
 
