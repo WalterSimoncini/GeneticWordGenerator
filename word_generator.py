@@ -17,7 +17,7 @@ def check_for_matching_word(population, word_to_match):
 
 # If not enough command line arguments are given by the user the program
 # will print an help text and quit
-if len(sys.argv) < 3:
+if len(sys.argv) < 4:
     print("Usage: python word_generator.py <initial_population> <mutation_rate> <verbose>\n")
     print("Initial population: an integer representing the initial population for the algoritm.")
     print("Mutation rate: the chance a newborn individual is mutated. Must be a float in the range [0, 1]")
@@ -43,14 +43,16 @@ target_individual_index = check_for_matching_word(population, test_word)
 # Until a matching individual is found repeat the breeding process
 while target_individual_index == -1:
     # Compute the population's fitness and select the individuals that will give birth
-    # to the next generation
+    # to the next generation. The individuals are selected using elitist selection
     fitnesses = compute_population_fitness(population, test_word)
     individuals_for_breeding = elitist_selection(fitnesses, max([int(population_size / 10), 2]))
     
-    # Give birth to children for the next generation
+    # Give birth to children for the next generation, the crossover method used
+    # takes half of the genes from each parent to create a new individual
     new_generation = create_children(individuals_for_breeding, population_size)
     # Carry over the mutation operation over the population with respect to the
-    # mutation rate (a.k.a how likely is mutation for an individual)
+    # mutation rate (a.k.a how likely is mutation for an individual). The mutation
+    # is carried over by randomly mutating a gene (a.k.a. letter of the word)
     population = mutate_population(new_generation, mutation_rate)
 
     if verbose:
