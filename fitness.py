@@ -33,4 +33,12 @@ def compute_population_fitness(population, word_to_match):
         individual_tuple = tuple([individual, fitness(word_to_match, individual)]);
         fitnesses.append(individual_tuple)
 
+<<<<<<< HEAD
     return fitnesses
+=======
+    for individual in sorted_individuals:
+        fitness_tuples.append(tuple([individual, fitnesses[individual]]))
+
+    return sorted(fitnesses.iteritems(), key = lambda (k,v): (v,k), reverse = True)
+    return fitness_tuples
+>>>>>>> 9fb52bf64c415c6b9e6479573349a799b1501fa6
